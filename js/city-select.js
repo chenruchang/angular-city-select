@@ -26,12 +26,15 @@
                 if (!!popup.domNode) {
                   popup.domNode.css({
                     top: element.offset().top + element.height() * 2,
-                    'margin-left': -popup.domNode.width() / 2
+                    left: element.offset().left
                   });
                 }
               },
               init: function () {
                 element.on('click', function (event) {
+
+                  angular.element('.city-select-container').hide();
+
                   popup.domNode.show();
                   popup.resize();
 
