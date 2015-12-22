@@ -1,0 +1,96 @@
+<style type="text/css">
+    .select-address {
+        overflow: hidden;
+        position: fixed;
+        left: 50%;
+        z-index: 1051;
+        transition: 0.5s;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, .175);
+        background: #fff;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .select-address-container ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .select-address-container ul li {
+        width: 240px;
+        padding: 10px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .select-address-container ul li:nth-child(even) {
+        background: #eee;
+    }
+
+    .select-address-container ul li span {
+        font-size: 13px;
+        list-style: none;
+        display: inline-block;
+        margin: 5px 7px;
+        cursor: pointer;
+    }
+
+    .select-address-footer {
+        border-top: 1px solid #eee;
+        padding: 10px 15px;
+        overflow: hidden;
+    }
+
+    .select-address-footer input {
+        min-width: 50%;
+    }
+
+    .margin-left-5{
+        margin-left: 5px;
+    }
+</style>
+
+<div class="select-address form-inline">
+    <div class="select-address-container">
+        <ul>
+            <li>
+                <!-- 省份 -->
+                <span ng-repeat="item in provinces"
+                      ng-click="select.selectProvince(item.p)"
+                      ng-class="{'label label-info': province === item.p}">
+                    {{item.p}}
+                </span>
+            </li>
+
+            <li ng-if="cities">
+                <!-- 城市 -->
+                <span ng-repeat="item in cities"
+                      ng-click="select.selectCity(item.n)"
+                      ng-class="{'label label-info': city === item.n}">
+                    {{item.n}}
+                </span>
+            </li>
+
+            <li ng-if="city">
+                <!-- 县或区级 -->
+                <span ng-repeat="item in regions"
+                      ng-click="select.selectRegion(item.s)"
+                      ng-class="{'label label-info': region === item.s}">
+                    {{item.s}}
+                </span>
+                <h5 ng-if="!regions" class="text-muted text-center">没有县或区级资料</h5>
+            </li>
+        </ul>
+    </div>
+
+    <div class="select-address-footer">
+        <span class="pull-right">
+            <button ng-click="clear()" class="btn btn-sm btn-danger">清空</button>
+            <button ng-click="submit()" class="btn btn-sm btn-info" type="submit">确定</button>
+        </span>
+
+        <strong class="text-info">{{ province }} {{ city }} {{ region }}</strong>
+        <input ng-show="province" ng-model="details" class="form-control input-sm margin-left-5" type="text" placeholder="请输入详细地址..."/>
+    </div>
+</div>
