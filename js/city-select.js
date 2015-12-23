@@ -1,7 +1,8 @@
 (function () {
   angular
       .module('selectCity', [])
-      .controller('SelectCityCtrl', function ($scope) {})
+      .controller('SelectCityCtrl', function ($scope) {
+      })
       .directive('selectCity', function ($http, $q, $compile) {
 
         var cityURL = 'data/city-data.js', templateURL = 'template/template.html', delay;
@@ -126,7 +127,11 @@
               });
 
               return scope.$watch(function () {
-                scope.ngModel = '';
+                //Fix the two-way data binding issue
+                if (scope.province || scope.city || scope.region || scope.details) {
+                  scope.ngModel = '';
+                }
+
                 if (scope.province) {
                   scope.ngModel += scope.province;
                 }
