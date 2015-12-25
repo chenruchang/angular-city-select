@@ -91,7 +91,7 @@
                 }
               };
               scope.clear = function () {
-                scope.province = scope.city = scope.region = scope.details = null;
+                scope.ngModel = scope.province = scope.city = scope.region = scope.details = null;
                 popup.domNode.hide();
               };
               scope.submit = function () {
